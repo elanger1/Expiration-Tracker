@@ -1,0 +1,70 @@
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+/* apply base font and color */
+body {
+font-family: Arial, sans-serif;
+color: #333;
+}
+
+/* style the navigation bar */
+nav {
+background-color: #f1f1f1;
+padding: 10px;
+}
+
+nav ul {
+list-style: none;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+nav li {
+margin: 0 10px;
+}
+
+nav a {
+text-decoration: none;
+color: #333;
+font-size: 16px;
+padding: 5px 10px;
+border-radius: 5px;
+transition: all 0.3s ease;
+}
+
+nav a:hover {
+background-color: #333;
+color: #fff;
+}
+
+nav a.active {
+background-color: #333;
+color: #fff;
+}
+
+nav a.disabled {
+opacity: 0.5;
+pointer-events: none;
+}
+
+/* media queries */
+@media (max-width: 768px) {
+nav ul {
+flex-direction: column;
+align-items: flex-start;
+}
+
+nav li {
+margin: 5px 0;
+}
+
+nav a {
+display: block;
+padding: 10px;
+}
+}
