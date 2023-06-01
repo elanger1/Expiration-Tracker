@@ -31,6 +31,6 @@ if(isset($_POST['send'])){
     $mail ->Body = $message;
     $mail->send();
     
-    header("Location: response.php");
+    header("Location: dashboard.php");
 }
 

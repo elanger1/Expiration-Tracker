@@ -1,6 +1,14 @@
 <?php
 session_start();
 require_once '../config.php';
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\SMTP;
+        use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
 
 if (!isset($_SESSION['email'])) {
     // Redirect the user to the login page or handle the case when the email is not set
@@ -23,8 +31,30 @@ if (isset($_POST['submit'])) {
     $stmt->bind_param("sisis", $eventName, $eventType, $eventDate, $days, $userEmail);
     
     if ($stmt->execute()) {
-        // Event added successfully
-        header('Location: ../dashboard.php');
+
+    $email = $userEmail;
+    $subject = "New Event Added";
+    $message = "You have scheduled $eventName. \nScheduled For:  
+            $eventDate. \nReminder Scheduled for $days Days Before. \nYou can view you events by logging in";
+    
+    $mail = new PHPMailer(true);
+    $mail ->isSMTP();
+    $mail ->Host = 'smtp.gmail.com';
+    $mail -> SMTPAuth = true;
+    $mail -> Username = 'expirenotice@gmail.com';
+    $mail-> Password = 'rwkqofwburcllclh';
+    $mail->Port = 465;
+    $mail -> SMTPSecure = 'ssl';
+    $mail ->isHTML(true);
+    $mail ->setFrom('expirenotice@gmail.com', 'Expiration Tracker');
+    $mail ->addAddress($email);
+    $mail->Subject = ($subject);
+    $mail ->Body = $message;
+    $mail->send();
+    
+    
+    header("Location: ../dashboard.php");
+
     } else {
         // Failed to add the event
         echo "Error adding event: " . $stmt->error;

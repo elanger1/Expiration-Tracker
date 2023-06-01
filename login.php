@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Log In</title>
         <link rel="stylesheet" href="css/login_style.css">
     </head>
@@ -48,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['email'] = $user['email'];
         $_SESSION['username'] = $user['username'];
         
-        header('Location: dashboard.php');
+        header('Location: script.php');
         exit();
     } else {
         // If email and password don't match, redirect back to login page with error message

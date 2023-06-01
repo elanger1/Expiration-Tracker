@@ -1,14 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="css/dashboard_style.css">
+    </head>
+
 <?php
-include('menu.php');
+include('menu.php');?>
+
+<div class="dashboard_body">
+<?php
 require_once 'config.php';
 if (!isset($_SESSION['email'])) {
     // Redirect the user to the login page or handle the case when the email is not set
-    // For example: header('Location: login.php');
-    exit;
+    header('Location: login.php');
+    //exit;
 }
 $userEmail = $_SESSION['email']; // Store the email in a variable for later use
 ?>
-  <body>
     <h1>Welcome <?php echo $userEmail; ?>!</h1>
     <p>This is your dashboard.</p>
    
@@ -38,6 +49,7 @@ $userEmail = $_SESSION['email']; // Store the email in a variable for later use
             <?php
             $s1 = "select id, type from event_types";
             $r1 = $conn->query($s1);
+            
             while ($row1 = $r1->fetch_assoc()) {
                 ?>
                 <container class='container'>
@@ -107,5 +119,6 @@ $conn->close();
 ?>
        </div>
 </div>   
+</div>
     
-    
+<?php include 'footer.html';
